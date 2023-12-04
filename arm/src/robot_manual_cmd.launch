@@ -1,0 +1,35 @@
+<launch> 
+  <rosparam command="load" file="$(find xarmrob_util)/src/robot_xarm_info.yaml" />
+
+  <arg name="model" default="$(find xarmrob_util)/src/urdf/robot-xarm.urdf" />
+  <arg name="gui" default="true" />
+  <arg name="rvizconfig" default="$(find xarmrob_util)/src/urdf/urdf.rviz" />
+
+  <param name="robot_description" command="xacro --inorder $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+  <node name="draw_pen_rviz" pkg="xarmrob" type="draw_pen_rviz.py" />
+
+  
+  <!-- Option: Use "joint_state_publisher" to publish desired angles (e.g. if the arm is calibrated). -->
+  <!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >-->
+    <!-- Normally it publishes a joint state directly, but we want it to publish desired angles instead. -->
+    <!--<remap from="/joint_states" to="/joint_angles_desired" />-->
+  <!--</node>-->
+  
+  <!-- Option: Use "manual_servo_cmd_sliders" to publish servo commands (e.g. if the arm is uncalibrated). -->
+  <node pkg="xarmrob" name="manual_servo_cmd_sliders" type="manual_servo_cmd_sliders.py"/>
+  
+  <!-- Utility node to convert angles to microsecond commands and send them to the arm. -->
+  <node pkg="xarmrob" name="command_xarm" type="command_xarm.py"/>
+
+
+  <!-- Add a camera viewer node, to display the view from a web cam. This node will crash if there's no camera; that's okay. -->
+  <group ns="robot_display">
+    <node pkg="xarmrob" name="cam_viewer" type="cam_viewer.py"/>
+  </group>
+  
+</launch>

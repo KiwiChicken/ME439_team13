@@ -1,0 +1,5 @@
+fix xarm offset issue
+update xarm inverse compute to include whole workspace
+double check waypoint seeking
+check how multiple pkgs coop, if not try combine mobrob and xarm
+adopt Car.msg in new node
