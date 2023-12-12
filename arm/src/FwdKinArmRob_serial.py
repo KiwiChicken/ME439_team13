@@ -8,10 +8,11 @@ import numpy as np
 # =============================================================================
 test_angles = [0.244978663127, -0.553231565311, 1.98924862896, 0.0, -1.43601706365, 0.0]
 test_angles = [0.0, -np.pi/2., np.pi/2., 0.0, 0.0, 0.0]
+test_angles = [1.5707963267948966, -1.4370749793134818, 2.742248686976024, 0.0, 0.2656226191323543, 0.0]
 
 
 def armrobfwdkin(angles_radians): 
-    print("input joint angles: "+ str(angles_radians))
+    print("input joint angles: ", angles_radians)
     y_rotation_sign = 1  # When we see a positive "beta" value, is it positive rotation about the +y (enter 1) or -y (enter -1) axis? 
     
    
@@ -100,7 +101,7 @@ def armrobfwdkin(angles_radians):
     pos_6 = (T_06*zerovec)[0:3,0]
     pos_endpoint = (T_06*np.vstack((r_6end,1)) )[0:3,0]
     
-    print("computed joint angles: %f\n%f\n%f\n%f\n%f\n%f\n%f\n" %(pos_0, pos_1, pos_2, pos_3, pos_4, pos_5, pos_6))
+    print("computed joint angles: ]", (pos_0, pos_1, pos_2, pos_3, pos_4, pos_5, pos_6))
     # =============================================================================
     # Return the resulting endpoint
     # =============================================================================

@@ -19,6 +19,7 @@ map_ang_rad_56 = np.radians(np.array(rospy.get_param('/rotational_angles_for_map
 map_ang_rad_gripper = np.radians(np.array(rospy.get_param('/rotational_angles_for_mapping_gripper')))
 
 # limits for each of the joints
+# keren: update here to enlarge workspace
 rotlim_01 = np.radians(np.array(rospy.get_param('/rotational_limits_joint_01')))
 rotlim_12 = np.radians(np.array(rospy.get_param('/rotational_limits_joint_12')))
 rotlim_23 = np.radians(np.array(rospy.get_param('/rotational_limits_joint_23')))
